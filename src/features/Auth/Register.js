@@ -4,14 +4,22 @@ import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Field, Label, Switch } from '@headlessui/react'
 
+import { registerUser, testing } from '../../services/AuthService';
+
 export default function Login() {
 
-  const [registerForm, setRegisterForm] = useState({
-    username: '',
-    email: '',
-    password: '',
-    role: ''
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('JOB_SEEKER');
+  const [image, setImage] = useState(null);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const userData = { username, role, image, password };
+    const response = await registerUser(userData);
+    console.log(response);
+  }
 
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -31,45 +39,68 @@ export default function Login() {
         <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Create Account</h2>
         <p className="mt-2 text-lg/8 text-gray-600">Please enter your details for create your account.</p>
       </div>
-      <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+      <form onSubmit={handleRegister} className="mx-auto mt-16 max-w-xl sm:mt-20">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
-              Email
-            </label>
             <div className="mt-2.5">
               <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
+                id="username"
+                name="username"
+                placeholder='Username'
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="username"
                 className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
-              Role
-            </label>
             <div className="mt-2.5">
-              <select required className='block w-full rounded-md bg-white px-3.5 text-center py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600'>
-                <option>select</option>
-                <option value="not_sure">Not Sure</option>
-                <option value="job_seeker">Job Seeker</option>
-                <option value="employer">Employer</option>
+              <select required name="role" value={role} onChange={(e)=>setRole(e.target.value)} className='block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600'>
+                <option>select role</option>
+                <option value="JOB_SEEKER">Job Seeker</option>
+                <option value="EMPLOYER">Employer</option>
               </select>
             </div>
           </div>
           <div className="sm:col-span-2">
-            <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900">
-              Password
-            </label>
+            <div className="mt-2.5">
+              <input
+                id="image"
+                name="image"
+                type="file"
+                placeholder='Profile Image'
+                onChange={(e)=>setImage(e.target.files[0])}
+                accept="image/*"
+                className="block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-2">
             <div className="mt-2.5">
               <input
                 id="password"
                 name="password"
+                placeholder='Password'
                 type="password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 autoComplete="password"
+                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              />
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <div className="mt-2.5">
+              <input
+                id="confirm_password"
+                name="confirm_password"
+                placeholder='Confirm Password'
+                type="password"
+                value={confirmPassword}
+                onChange={(e)=>setConfirmPassword(e.target.value)}
+                autoComplete="confirm_password"
                 className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
