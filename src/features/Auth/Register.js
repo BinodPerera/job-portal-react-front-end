@@ -16,10 +16,33 @@ export default function Login() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
     const userData = { username, role, image, password };
-    const response = await registerUser(userData);
-    console.log(response);
-  }
+
+    try {
+      const response = await registerUser(userData);
+      console.log(response);
+
+      // ✅ Clear the form after successful register
+      setUsername('');
+      setPassword('');
+      setConfirmPassword('');
+      setRole('JOB_SEEKER');
+      setImage(null);
+
+      // Optionally show a success message or redirect
+      alert("Registration successful!");
+    } catch (error) {
+      console.error("Error during registration", error);
+      alert("Registration failed!");
+    }
+  };
+
 
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -51,17 +74,30 @@ export default function Login() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 autoComplete="username"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
           <div className="sm:col-span-2">
             <div className="mt-2.5">
-              <select required name="role" value={role} onChange={(e)=>setRole(e.target.value)} className='block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600'>
-                <option>select role</option>
-                <option value="JOB_SEEKER">Job Seeker</option>
-                <option value="EMPLOYER">Employer</option>
-              </select>
+              <div className="relative w-full">
+                <select
+                  required
+                  name="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="block w-full rounded-full bg-white px-3.5 py-2 pr-10 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 appearance-none"
+                >
+                  <option>select role</option>
+                  <option value="JOB_SEEKER">Job Seeker</option>
+                  <option value="EMPLOYER">Employer</option>
+                </select>
+                <div className="pointer-events-none absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400">
+                  ▼
+                </div>
+              </div>
+
+
             </div>
           </div>
           <div className="sm:col-span-2">
@@ -73,7 +109,7 @@ export default function Login() {
                 placeholder='Profile Image'
                 onChange={(e)=>setImage(e.target.files[0])}
                 accept="image/*"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -87,7 +123,7 @@ export default function Login() {
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}
                 autoComplete="password"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -101,7 +137,7 @@ export default function Login() {
                 value={confirmPassword}
                 onChange={(e)=>setConfirmPassword(e.target.value)}
                 autoComplete="confirm_password"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -110,7 +146,7 @@ export default function Login() {
         <div className="mt-10">
           <button
             type="submit"
-            className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="block w-full rounded-full bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Create Account
           </button>

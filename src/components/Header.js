@@ -22,8 +22,9 @@ export default function Example() {
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
-                src="logo192.png"
+                src="logo.png"
                 className="h-8 w-auto"
+                style={{ borderRadius: '50%' }}
               />
             </a>
           </div>
