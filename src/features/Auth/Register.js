@@ -74,7 +74,7 @@ export default function Login() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 autoComplete="username"
-                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-center text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function Login() {
                   name="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="block w-full rounded-full bg-white px-3.5 py-2 pr-10 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 appearance-none"
+                  className="block w-full rounded-full bg-white text-center px-3.5 py-2 pr-10 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 appearance-none"
                 >
                   <option>select role</option>
                   <option value="JOB_SEEKER">Job Seeker</option>
@@ -109,7 +109,7 @@ export default function Login() {
                 placeholder='Profile Image'
                 onChange={(e)=>setImage(e.target.files[0])}
                 accept="image/*"
-                className="block w-full rounded-full bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full text-center bg-white px-3.5 py-2 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function Login() {
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}
                 autoComplete="password"
-                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-center text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function Login() {
                 value={confirmPassword}
                 onChange={(e)=>setConfirmPassword(e.target.value)}
                 autoComplete="confirm_password"
-                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                className="block w-full rounded-full bg-white px-3.5 py-2 text-base text-center text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
