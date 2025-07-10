@@ -6,7 +6,7 @@ import { Field, Label, Switch } from '@headlessui/react'
 
 import { registerUser, testing } from '../../services/AuthService';
 
-export default function Login() {
+export default function Register() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

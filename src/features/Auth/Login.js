@@ -3,15 +3,36 @@
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Field, Label, Switch } from '@headlessui/react'
+import { useNavigate } from 'react-router-dom'
+
+import { loginUser } from '../../services/AuthService';
 
 export default function Login() {
   const [agreed, setAgreed] = useState(false);
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const loginDetails = { username, password };
+    try {
+      const data = await loginUser(loginDetails); // this is already JSON
+      console.log("User Logged In:", data);
+      navigate('/dashboard');
+
+    } catch (error) {
+      console.error("Error during login", error);
+      alert(error.message);
+    }
+  };
+
+
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+      
       <div
         aria-hidden="true"
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -28,7 +49,7 @@ export default function Login() {
         <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Login</h2>
         <p className="mt-2 text-lg/8 text-gray-600">Please enter your login credentials.</p>
       </div>
-      <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+      <form onSubmit={handleLogin} method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <div className="mt-2.5">

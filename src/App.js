@@ -11,6 +11,8 @@ import Login from './features/Auth/Login';
 import Register from './features/Auth/Register';
 import HorizontalScrollList from './HorizontalScrollList';
 import Endpoints from './features/Endpoint/Endpoints';
+import Dashboard from "./features/Dashboard/Dashboard";
+import AuthChecker from "./components/AuthChecker";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/endpoints" element={<Endpoints/>} />
+          <Route path="/dashboard/:path" element={<AuthChecker><Dashboard/></AuthChecker>} />
         </Routes>
       </Router>
     </div>

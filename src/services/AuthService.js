@@ -8,10 +8,7 @@ export const registerUser = async (userData) => {
   formData.append("image", userData.image); // image is a File object
 
   try {
-    const response = await fetch(`${API_URL}/register`, {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(`${API_URL}/register`, { method: "POST", body: formData });
 
     if (!response.ok) {
       throw new Error("Failed to register user");
@@ -25,36 +22,26 @@ export const registerUser = async (userData) => {
   }
 };
 
-export const testing = async (userData) => {
-    try {
-        const response = await fetch(`${API_URL}/testing`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username: "Testing User1"})
-        });
+export const loginUser = async (loginDetails) => {
+  try {
+    const response = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include', // ✅ Include cookies
+      body: JSON.stringify(loginDetails)
+    });
 
-        const data = await response.json();
-        return data;
+    if (!response.ok) {
+      throw new Error("Login failed!");
     }
-    catch (error) {
-        console.error("Error: ", error);
-        return { error: "Something went wrong" };
-    }
-}
 
-export const loginUser = async (username, password) => {
-    try{
-        const response = await fetch(`${API_URL}/login`, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({
-                username: username, 
-                password: password,
-            }),
-        });
-        return response;
-    }
-    catch(error){
-        return(`Error: ${error}`);
-    }
-}
+    return await response.text(); // or JSON if backend sends structured response
+  } catch (error) {
+    console.error("Login error appeared! :", error);
+    throw error;
+  }
+};
+
+
