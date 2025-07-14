@@ -8,9 +8,6 @@ const AuthChecker = ({children}) => {
         axios.get("http://localhost:8080/api/auth/check", {
             withCredentials: true,
         })
-        .then(()=>{
-            navigate("/dashboard/profile");
-        })
         .catch(()=>{
             navigate("/login");
         });
