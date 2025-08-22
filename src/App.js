@@ -23,61 +23,24 @@ import Home from "./features/Home/Home";
 function App() {
   return (
     <div className="App">
-      <Header />
       <Router>
         <Routes>
 
-          <Route path='*' element={<div>404 Page Not Found</div>} />
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/endpoints" element={<Endpoints/>} />
+          <Route path='*' element={<div><Header/>404 Page Not Found</div>} />
+          <Route path="/" element={<><Header/><Home/></>} />
+          <Route path="/login" element={<><Header/><Login/></>} />
+          <Route path="/register" element={<><Header/><Register/></>} />
+          <Route path="/endpoints" element={<><Header/><Endpoints/></>} />
 
           <Route path="/dashboard/*" element={
             <AuthChecker>
-              <div className="flex">
-                <Sidebar />
-                <div className="flex-1 bg-gray-100 min-h-screen">
-                  <Navbar />
-                  <Settings />
-                </div>
-              </div>
+              <Sidebar />
             </AuthChecker>} 
           />
 
-          <Route path="/dashboard/dashboard" element={
+          <Route path="/dashboard/:page" element={
             <AuthChecker>
-              <div className="flex">
-                <Sidebar />
-                <div className="flex-1 bg-gray-100 min-h-screen">
-                  <Navbar />
-                  <Dashboard />
-                </div>
-              </div>
-            </AuthChecker>} 
-          />
-
-          <Route path="/dashboard/profile" element={
-            <AuthChecker>
-              <div className="flex">
-                <Sidebar />
-                <div className="flex-1 bg-gray-100 min-h-screen">
-                  <Navbar />
-                  <Profile />
-                </div>
-              </div>
-            </AuthChecker>} 
-          />
-
-          <Route path="/dashboard/settings" element={
-            <AuthChecker>
-              <div className="flex">
-                <Sidebar />
-                <div className="flex-1 bg-gray-100 min-h-screen">
-                  <Navbar />
-                  <Settings />
-                </div>
-              </div>
+              <Sidebar />
             </AuthChecker>} 
           />
 
